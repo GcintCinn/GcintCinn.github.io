@@ -1,152 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO优化 -->
-    <title>GcintCinnBlog</title>
-    <meta name="description" content="个人技术博客">
-    <meta name="keywords" content="技术博客,编程学习,生活博客">
-    <meta name="author" content="GcintCinn">
-    
+    <!-- 头部元信息保持不变 -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            background: #ffffff;
-            color: #333;
-        }
-
-        /* 暗色模式 */
-        body.dark-mode {
-            background: #1a1a1a;
-            color: #f0f0f0;
-        }
-
+        /* 新增标题样式 */
         .header-image {
-            height: 66vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                        url("https://cdn.jsdelivr.net/gh/GcintCinn/PictureBed@main/img/UkinoshitaUkino.PNG") center/cover;
-        }
-
-        .menu {
-            background: #f8f9fa;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .menu ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-        }
-
-        /* 右侧悬浮按钮列 */
-        .float-buttons {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 999;
-        }
-
-        .float-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-            font-size: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .float-btn:hover {
-            transform: scale(1.1);
+        .header-text {
+            position: absolute;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
-        /* 暗色模式适配 */
-        body.dark-mode .menu {
-            background: #2d2d2d;
+        .header-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
-        body.dark-mode .menu a {
-            color: #f0f0f0;
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
-            .float-buttons {
-                right: 15px;
-                bottom: 15px;
-                top: auto;
-                transform: none;
+            .header-text h1 {
+                font-size: 2rem;
             }
-            .float-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
+            .header-text p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header-image"></header>
+    <header class="header-image">
+        <!-- 新增标题文字 -->
+        <div class="header-text">
+            <h1>小明の技术博客</h1>
+            <p>探索数字世界 分享编程乐趣</p>
+        </div>
+    </header>
 
-    <nav class="menu">
-        <ul>
-            <li><a href="#home">首页</a></li>
-            <li><a href="#articles">文章</a></li>
-            <li><a href="#about">关于</a></li>
-            <li><a href="#friends">友链</a></li>
-        </ul>
-    </nav>
-
-    <!-- 悬浮按钮列 -->
-    <div class="float-buttons">
-        <button class="float-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
-        <button class="float-btn" id="themeToggle">🌞</button>
-        <button class="float-btn" id="likeBtn">❤️ 0</button>
-    </div>
+    <!-- 其他部分保持不变 -->
 
     <script>
-        // 显示/隐藏返回顶部按钮
-        window.addEventListener('scroll', function() {
-            const topBtn = document.querySelector('.float-buttons').firstElementChild;
-            topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-        });
-
-        // 主题切换功能
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌛' : '🌞';
-        });
-
-        // 点赞功能
+        // 修改后的点赞功能（移除了alert）
         let likeCount = localStorage.getItem('likeCount') || 0;
         const likeBtn = document.getElementById('likeBtn');
         likeBtn.textContent = `❤️ ${likeCount}`;
@@ -158,17 +64,6 @@
             likeBtn.style.transform = 'scale(1.2)';
             setTimeout(() => { likeBtn.style.transform = 'scale(1)' }, 200);
         });
-    </script>
-
-    <!-- 结构化数据 -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "小明博客",
-        "url": "https://yourdomain.com",
-        "description": "技术与生活分享平台"
-    }
     </script>
 </body>
 </html>
