@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    background: #ffffff;
+    color: #333;
+}
+
+/* 暗色模式 */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.header-image {
+    height: 66vh;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                url("https://cdn.jsdelivr.net/gh/GcintCinn/PictureBed@main/img/202505171259299.PNG") center/cover;
+}
+
+.menu {
+    background: #f8f9fa;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* 右侧悬浮按钮列 */
+.float-buttons {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.float-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.float-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 暗色模式适配 */
+body.dark-mode .menu {
+    background: #2d2d2d;
+}
+
+body.dark-mode .menu a {
+    color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+    .float-buttons {
+        right: 15px;
+        bottom: 15px;
+        top: auto;
+        transform: none;
+    }
+    .float-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
